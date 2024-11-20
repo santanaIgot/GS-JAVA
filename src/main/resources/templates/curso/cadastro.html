@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro de Curso</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container mt-5" layout:fragment="conteudo">
+    <h1 class="text-center mb-4">Cadastro de Curso</h1>
+
+    <div th:if="!${#strings.isEmpty(msg)}" class="alert alert-success text-center">
+        <span th:text="${msg}"></span>
+    </div>
+
+    <form th:action="@{/curso/save}" th:object="${curso}" method="post">
+        <div class="form-group">
+            <label for="nomeCurso">Nome</label>
+            <input th:field="*{nomeCurso}" type="text" class="form-control" id="nome" placeholder="Digite o nome do curso">
+        </div>
+        <div class="form-group">
+            <label for="descricao">Descrição</label>
+            <input th:field="*{descricao}" type="text" class="form-control" id="descricao" placeholder="Digite a descricação do curso">
+        </div>
+
+        <div class="form-group">
+            <label for="descricao">Digite a carga horária</label>
+            <input th:field="*{cargaHoraria}" type="number" class="form-control" id="cargaHoraria" placeholder="Digite a descricação do curso">
+        </div>
+
+
+
+        <button type="submit" class="btn btn-primary btn-block">Salvar</button>
+    </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

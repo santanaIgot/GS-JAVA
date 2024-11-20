@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Edição de Curso</title>
+    <!-- Link para o Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5" layout:fragment="conteudo">
+    <h1 class="mb-4">Edição de Curso</h1>
+
+    <!-- Formulário de Edição -->
+    <form th:action="@{/curso/editar}" method="post" th:object="${curso}">
+        <!-- Campo oculto para o ID do curso -->
+        <input hidden="hidden" th:field="*{id}">
+
+        <!-- Exibição de erros de validação -->
+        <div class="alert alert-danger" th:if="${#fields.hasErrors('*')}">
+            <ul>
+                <li th:each="err : ${#fields.errors('*')}" th:text="${err}"></li>
+            </ul>
+        </div>
+
+        <!-- Campo para o nome do curso -->
+        <div class="mb-3">
+            <label class="form-label" for="nomeCurso">Nome do Curso</label>
+            <input type="text" th:field="*{nomeCurso}" class="form-control" id="nomeCurso" required>
+            <p th:if="${#fields.hasErrors('nomeCurso')}" class="text-danger" th:errors="*{nomeCurso}"></p>
+        </div>
+
+        <!-- Campo para a descrição do curso -->
+        <div class="mb-3">
+            <label class="form-label" for="descricao">Descrição</label>
+            <textarea th:field="*{descricao}" class="form-control" id="descricao" rows="4" required></textarea>
+            <p th:if="${#fields.hasErrors('descricao')}" class="text-danger" th:errors="*{descricao}"></p>
+        </div>
+
+        <!-- Campo para a carga horária -->
+        <div class="mb-3">
+            <label class="form-label" for="cargaHoraria">Carga Horária</label>
+            <input type="number" class="form-control" th:field="*{cargaHoraria}" id="cargaHoraria" required>
+            <p th:if="${#fields.hasErrors('cargaHoraria')}" class="text-danger" th:errors="*{cargaHoraria}"></p>
+        </div>
+
+        <!-- Botão de submissão -->
+        <button type="submit" class="btn btn-success">Salvar Edição</button>
+
+        <!-- Botão para voltar para a lista de cursos -->
+        <a href="/curso/lista" class="btn btn-secondary ms-2">Voltar para a Lista</a>
+    </form>
+</div>
+
+<!-- Scripts do Bootstrap -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
